@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>AR Ilustración</title>
+<head>
+  <meta charset="utf-8">
+  <title>AR Amiguito</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+</head>
 
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+<body style="margin:0; overflow:hidden;">
+  <a-scene embedded arjs>
+    
+    <a-assets>
+      <video id="video" src="video.mp4" loop crossorigin="anonymous"></video>
+    </a-assets>
 
-    <style>
-      body { margin: 0; overflow: hidden; }
-    </style>
-  </head>
+    <a-marker type="pattern" url="marker.patt">
+      <a-video 
+        src="#video"
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="1"
+        height="0.6">
+      </a-video>
+    </a-marker>
 
-  <body>
-    <a-scene embedded arjs>
+    <a-entity camera></a-entity>
+  </a-scene>
 
-      <a-assets>
-        <video id="video" src="animacion.mp4" loop autoplay muted playsinline></video>
-      </a-assets>
-
-      <a-marker type="pattern" url="marker.patt">
-        <a-video
-          src="#video"
-          width="1"
-          height="0.56"
-          position="0 0 0"
-          rotation="-90 0 0">
-        </a-video>
-      </a-marker>
-
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+  <script>
+    document.querySelector('a-scene').addEventListener('loaded', () => {
+      const video = document.querySelector('#video');
+      video.play();
+    });
+  </script>
+</body>
 </html>
